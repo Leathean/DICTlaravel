@@ -4,6 +4,7 @@
 
     use Illuminate\Http\Request;
     use App\Models\Movie;
+    use App\Models\Category;
     class MovieController extends Controller
     {
         /**
@@ -11,8 +12,10 @@
          */
         public function index()
         {
-            $data = Movie::all();
+
+            $data = Movie::with('category')->get();
             return view('Pages.page1',compact('data'));
+
         }
 
         /**
@@ -20,7 +23,8 @@
          */
     public function create()
     {
-        return view('Pages.movie-form');
+        $categories = Category::select('id', 'name')->where('id', '<',5)->get();
+        return view('Pages.movie-form', compact('categories'));
     }
 
         /**
@@ -49,7 +53,9 @@
         'star_rating' => $request->star_rating,
         'director' => $request->director,
         'date_published' => $request->date_published,
+        'category_id' => $request->category_id,
         'photo' => $path ?? null,
+
     ]);
 
     return redirect()->route('movies.index')
@@ -70,7 +76,8 @@
         public function edit(string $id)
         {
             $data = Movie::findOrFail($id);
-            return view('Pages.movie-form', compact('data'));
+            $categories = Category::select('id', 'name')->get();
+            return view('Pages.movie-form', compact('data', 'categories'));
         }
 
         /**
@@ -101,6 +108,7 @@
                 'star_rating' => $request->star_rating,
                 'director' => $request->director,
                 'date_published' => $request->date_published,
+                'category_id' => $request->category_id,
                 'photo'=> $path ?? null,
 
 

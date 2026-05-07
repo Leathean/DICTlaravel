@@ -16,7 +16,13 @@ class Movie extends Model
         'director',
         'star_rating',
         'date_published',
+        'category_id',
         'photo',
 
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
