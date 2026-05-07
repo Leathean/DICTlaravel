@@ -17,21 +17,14 @@
     <div class="row">
         <div class="col-lg-12">
 
-            {{-- BUTTON --}}
             <div class="mb-3">
                 <x-action-button class="btn-primary">
-                    <x-slot name="button_text">
-                        Add a movie
-                    </x-slot>
-
-                    <x-slot name="link">
-                        {{ route('movies.create') }}
-                    </x-slot>
+                    <x-slot name="button_text">Add a movie</x-slot>
+                    <x-slot name="link">{{ route('movies.create') }}</x-slot>
                 </x-action-button>
             </div>
 
             <div class="ibox">
-
                 <div class="ibox-title">
                     <h5>List of Movies</h5>
                 </div>
@@ -67,27 +60,20 @@
 
                                         <td>{{ $d->star_rating }}</td>
 
-                                        <td>
-                                            @if($d->photo)
-                                                <img src="{{ asset('storage/' . $d->photo) }}"
-                                                     width="80"
-                                                     height="80"
-                                                     style="object-fit: cover;">
-                                            @endif
-                                        </td>
+<td>
+    <img src="{{ Storage::url($d->photo) }}" width="80" height="80">
+</td>
 
                                         <td>{{ $d->date_published }}</td>
                                         <td>{{ $d->director }}</td>
 
                                         <td class="text-nowrap">
 
-                                            {{-- EDIT --}}
                                             <a href="{{ route('movies.edit', $d->id) }}"
                                                class="btn btn-sm btn-primary">
                                                 <i class="fa fa-pencil-square-o"></i>
                                             </a>
 
-                                            {{-- DELETE --}}
                                             <form action="{{ route('movies.destroy', $d->id) }}"
                                                   method="POST"
                                                   style="display:inline;">
