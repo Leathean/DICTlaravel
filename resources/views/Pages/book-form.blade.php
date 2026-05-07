@@ -81,7 +81,7 @@
                 </div>
 
 
-                <!-- COUNTRY ID -->
+                {{-- <!-- COUNTRY ID -->
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Country ID</label>
 
@@ -99,8 +99,19 @@
                         </div>
                         @enderror
                     </div>
-                </div>
+                </div> --}}
 
+                <div class="form-group row"><label class="col-sm-2 col-form-label">Select Country</label>
+
+                <div class="col-sm-10"><select class="form-control m-b" name="country_id">
+                @foreach($countries as $c)
+                <option value="{{ $c->id }}" {{ old('country_id', $data->country_id ?? '') == $c->id ? 'selected' : '' }}>
+                {{ $c->name }}
+            </option>
+                 @endforeach
+                                    </select>
+                                    </div>
+                                </div>
 
                 <!-- STOCKS -->
                 <div class="form-group row">

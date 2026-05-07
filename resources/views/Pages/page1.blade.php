@@ -60,9 +60,9 @@
 
                                         <td>{{ $d->star_rating }}</td>
 
-<td>
-    <img src="{{ Storage::url($d->photo) }}" width="80" height="80">
-</td>
+                                            <td>
+                                                <img src="{{ Storage::url($d->photo) }}" width="80" height="80">
+                                            </td>
 
                                         <td>{{ $d->date_published }}</td>
                                         <td>{{ $d->director }}</td>

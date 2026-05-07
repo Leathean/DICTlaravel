@@ -17,7 +17,6 @@ class MovieController extends Controller
     public function create()
     {
         $categories = Category::select('id', 'name')
-            ->where('id', '<', 5)
             ->get();
 
         return view('Pages.movie-form', compact('categories'));
@@ -50,7 +49,7 @@ class MovieController extends Controller
             'director' => $request->director,
             'date_published' => $request->date_published,
             'category_id' => $request->category_id,
-            'photo' => $path,
+            'photo' => $path ?? null,
         ]);
 
         return redirect()->route('movies.index')
@@ -81,9 +80,7 @@ class MovieController extends Controller
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-
             $filename = time() . '.' . $file->getClientOriginalExtension();
-
             $path = $file->storeAs('movies', $filename, 'public');
         }
 
@@ -94,7 +91,7 @@ class MovieController extends Controller
             'director' => $request->director,
             'date_published' => $request->date_published,
             'category_id' => $request->category_id,
-            'photo' => $path,
+            'photo' => $path ?? null,
         ]);
 
         return redirect()->route('movies.index')

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
-
+use App\Models\Country;
 class BookController extends Controller
 {
     /**
@@ -12,17 +12,20 @@ class BookController extends Controller
      */
     public function index()
     {
-        $data = Book::all();
+        $data = Book::with('country')->get();
         return view('Pages.page2',compact('data'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
- public function create()
-{
-    return view('Pages.book-form');
-}
+
+    public function create()
+    {
+        $countries = Country::select('id', 'name')
+            ->get();
+
+        return view('Pages.book-form', compact('countries'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -32,7 +35,6 @@ class BookController extends Controller
 
     $request->validate([
         'title' => 'required',
-        'country_id'=>'required|integer|min:1|max:50',
         'stocks'=>'required|integer|min:1|max:50',
         'amount' => 'required|numeric|min:0.01|max:1000',
         'photo' => 'nullable|image|mimes:jpg,jpeg,png'
@@ -67,10 +69,13 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+
     public function edit(string $id)
     {
         $data = Book::findOrFail($id);
-        return view('Pages.book-form', compact('data'));
+        $countries = Country::select('id', 'name')->get();
+
+        return view('Pages.book-form', compact('data', 'countries'));
     }
 
     /**
@@ -81,14 +86,13 @@ class BookController extends Controller
         $data = Book::findOrFail($id);
             $path = $data->photo;
 
-if($request->hasFile('photo')){
-    $file = $request->file('photo');
-    $filename = time().'.'.$file->getClientOriginalExtension();
-    $path = $file->storeAs('books', $filename, 'public');
-}
+        if($request->hasFile('photo')){
+            $file = $request->file('photo');
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $path = $file->storeAs('books', $filename, 'public');
+        }
         $request->validate([
         'title' => 'required',
-        'country_id'=>'required|integer|min:1|max:50',
         'stocks'=>'required|integer|min:1|max:50',
         'amount' => 'required|numeric|min:0.01|max:1000',
         'photo' => 'nullable|image|mimes:jpg,jpeg,png'

@@ -54,8 +54,10 @@
                                     <td>{{ $d->id }}</td>
                                     <td>{{ $d->title }}</td>
                                     <td>{{ $d->description }}</td>
-                                    <td>{{ $d->country_id }}</td>
-                                    <td><img src="{{ isset($d) && $d->photo ? asset('storage/' . $d->photo) : '' }}" width="80" height="80"></td>
+                                    <td>{{ $d->country->name ?? 'No country' }}</td>
+                                    <td>
+                                                <img src="{{ Storage::url($d->photo) }}" width="80" height="80">
+                                    </td>
                                     <td>{{ $d->stocks }}</td>
                                     <td>{{ $d->amount }}</td>
 

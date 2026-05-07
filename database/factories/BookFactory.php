@@ -20,7 +20,7 @@ class BookFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'description' =>fake()->text(),
-            'country_id'=> fake()->numberBetween(1,50),
+            'country_id'=> fake()->numberBetween(1,10),
             'stocks' => fake()->numberBetween(1,100),
             'amount'=> fake()->randomFloat(2, 0, 1000),
             'photo' => fake()->imageUrl(640, 480, 'products', true)
