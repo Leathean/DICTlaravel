@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('Pages.dashboard');
+    return view('Pages.login');
 });
 
 
@@ -58,3 +58,13 @@ Route::post('/register',
 Route::post('/logout',
 [AuthController::class, 'logout'
 ])->name('logout');
+
+
+Route::resource('movies', MovieController::class)
+->only('index');
+
+
+Route::resource('movies', MovieController::class)
+->except('index')
+->middleware(['auth','admin']);
+

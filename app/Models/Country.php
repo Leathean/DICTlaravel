@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Country extends Model
 {
     use HasFactory;
-       public function movie()
+    protected $fillable = [
+        'name',
+    ];
+       public function book()
     {
         return $this->hasMany(Book::class);
     }

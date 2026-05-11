@@ -17,16 +17,20 @@
     <div class="row">
         <div class="col-lg-12">
 
-            <div class="mb-3">
-                <x-action-button class="btn-primary">
-                    <x-slot name="button_text">Add a movie</x-slot>
-                    <x-slot name="link">{{ route('movies.create') }}</x-slot>
-                </x-action-button>
-            </div>
 
             <div class="ibox">
                 <div class="ibox-title">
                     <h5>List of Movies</h5>
+                    @if (Auth::user()->role === 'admin')
+                    <div class="mb-3">
+                        <x-action-button class="btn-primary">
+                            <x-slot name="button_text">Add a movie</x-slot>
+                            <x-slot name="link">{{ route('movies.create') }}</x-slot>
+                        </x-action-button>
+                     </div>
+
+                    @endif
+
                 </div>
 
                 <div class="ibox-content">
