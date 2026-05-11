@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('Pages.dashboard');
@@ -11,7 +13,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('Pages.dashboard');
-})->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 Route::resource('movies', MovieController::class);
 Route::resource('books', BookController::class);
@@ -34,3 +36,25 @@ Route::get('/page4', function () {
 Route::get('/movie-form', function () {
     return view('Pages.movie-form');
 })->name('mf');
+
+Route::get('/register', function () {
+    return view('Pages.register');
+})->name('register');
+
+Route::get('/login', function () {
+    return view('Pages.login');
+})->name('login');
+
+
+Route::post('/login',
+[AuthController::class, 'login'])
+->name('login');
+
+Route::post('/register',
+[AuthController::class, 'register'
+])->name('register');
+
+
+Route::post('/logout',
+[AuthController::class, 'logout'
+])->name('logout');

@@ -33,7 +33,7 @@
                         <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
                         <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
                         <li class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                        <li><a class="dropdown-item" href="">Logout</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -48,15 +48,12 @@
                 <a href="{{route('movies.index') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Page one</span></a>
             </li>
             <li class="active">
-                <a href="{{route('books.index') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Page2</span></a>
+                <a href="{{route('books.index') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Page two</span></a>
             </li>            <li class="active">
-                <a href="{{route('p3') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Page3</span></a>
+                <a href="{{route('p3') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Page three</span></a>
             </li>
             </li>            <li class="active">
-                <a href="{{route('p4') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Page4</span></a>
-            </li>
-                        </li>            <li class="active">
-                <a href="{{route('mf') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Movie form</span></a>
+                <a href="{{route('p4') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Page four</span></a>
             </li>
         </ul>
 
@@ -172,13 +169,13 @@
                         </div>
                     </li>
                 </ul>
-            </li>
-
-
-            <li>
-                <a href="login.html">
-                    <i class="fa fa-sign-out"></i> Log out
-                </a>
+                <li>
+                   <form action="{{ route('logout') }}" method="POST" >
+                    @csrf
+                    <button type="submit" class="btn btn-grey btn-bitbucket text-primary ">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </button>
+                </form>
             </li>
         </ul>
 
